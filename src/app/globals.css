@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/*
+  Sufra design tokens.
+
+  Three rooms, one system:
+  - Staff screens: a quiet sage desk, deep za'atar green for actions, and
+    four status colours that mean the same thing everywhere (new, cooking,
+    ready, late). Nothing else is allowed to be loud.
+  - The kitchen board: dark steel, so it reads from across a hot line.
+  - The guest menu belongs to the restaurant: Jamr's brass and charcoal,
+    taken from the coffee pot and the slate in its own photographs.
+*/
+@theme {
+  --font-sans: "Rubik Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-ruqaa: "Aref Ruqaa", "Rubik Variable", serif;
+
+  --color-paper: #ffffff;
+  --color-desk: #eef1ee;
+  --color-well: #f6f8f6;
+  --color-ink: #17201d;
+  --color-ink-2: #3b4542;
+  --color-muted: #66706c;
+  --color-faint: #9aa39f;
+  --color-rule: #dbe1dd;
+  --color-rule-2: #e9ede9;
+
+  --color-zaatar: #235a48;
+  --color-zaatar-deep: #173f32;
+  --color-zaatar-soft: #dcebe4;
+  /* Chart marks: za'atar with enough chroma to read as colour, not grey (validated). */
+  --color-chart: #1b7f57;
+
+  /* Status: new, preparing, ready, late. */
+  --color-saffron: #c9860f;
+  --color-saffron-soft: #fbf0d8;
+  --color-sky: #2f7cc0;
+  --color-sky-soft: #ddecf8;
+  --color-mint: #1f8a57;
+  --color-mint-soft: #dcf2e6;
+  --color-pom: #c23b36;
+  --color-pom-soft: #fbe3e1;
+
+  /* Kitchen. */
+  --color-steel: #111617;
+  --color-steel-2: #1a2123;
+  --color-steel-3: #253033;
+  --color-steel-4: #34403f;
+  --color-chalk: #e8edeb;
+  --color-chalk-2: #a7b2ae;
+  --color-k-new: #f0b443;
+  --color-k-prep: #5aa6e6;
+  --color-k-ready: #3fc786;
+  --color-k-late: #f0625a;
+
+  /* Jamr, the demo restaurant. */
+  --color-brass: #8c5f28;
+  --color-brass-deep: #6d4818;
+  --color-brass-soft: #f4ead9;
+  --color-slate: #23282a;
+  --color-stone: #f5f4f2;
+
+  --radius-sheet: 22px;
+  --radius-card: 14px;
+  --radius-control: 10px;
+
+  --animate-rise: rise 520ms cubic-bezier(0.2, 0.9, 0.25, 1) both;
+  --animate-pop: pop 420ms cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  --animate-flash: flash 1.6s ease-out 2;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+}
+
+/* A new ticket's header glows twice, then settles. */
+@keyframes flash {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-k-new) 70%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+:lang(ar) {
+  line-height: 1.7;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hide scrollbars on horizontal strips (category tabs) without disabling scrolling. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-zaatar);
+  outline-offset: 2px;
+}
+.kitchen :focus-visible {
+  outline-color: var(--color-k-prep);
+}
+.guest :focus-visible {
+  outline-color: var(--color-brass);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+  }
+}

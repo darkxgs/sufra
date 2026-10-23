@@ -1,0 +1,27 @@
+# Puts the menu photos into the repository the first time (and whenever the
+# list changes), so the site serves them itself.
+name: Menu photos
+
+on:
+  push:
+    branches: [main]
+    paths: ["scripts/photos.txt", "scripts/photos.sh"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick webp
+      - run: bash scripts/photos.sh
+      - name: Commit the photos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add public/photos
+          git diff --cached --quiet || { git commit -m "Menu photos"; git push; }

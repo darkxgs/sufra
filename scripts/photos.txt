@@ -1,0 +1,26 @@
+# slug  source (Higgsfield render, generated for the fictional demo restaurant)
+cover https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154744_d413c253-2b46-40c4-954e-6343024b7157.png
+hummus https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154744_2781a21b-6182-43ab-8e1d-f0cc3486ff65.png
+mutabbal https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154744_aa4da402-4b04-4626-b188-f0c799006a44.png
+fattoush https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154744_f62bdd82-1214-4d48-bf65-33f0f219b274.png
+tabbouleh https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154744_97c7fecd-9737-41cc-a3af-c83bc90c07fa.png
+muhammara https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154744_78e20150-a040-4c85-8efa-1b60d0c69bdb.png
+kibbeh https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154744_78dfa6bf-1df6-470a-9b43-2c3a372679be.png
+sambousek https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154744_a2bb8cce-5443-4f9f-83b0-358b9f0d507b.png
+batata-harra https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154744_61796e42-978b-4713-8f9d-9be5b4a1f5e2.png
+shish-tawook https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154744_1ba3e896-3e8e-4bf7-86b7-45ef0533c783.png
+lamb-kebab https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154744_145a8cdb-ca0b-4648-9cf3-205a9f6c825e.png
+lamb-chops https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154745_e5414f0c-06a0-4228-8d90-75bac7825ade.png
+mixed-grill https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154809_58ad4eec-a19d-429d-b20c-c1a1ea60c2f8.png
+half-chicken https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154809_0d6cb4cc-9ef1-4c71-944a-fc469d17aeb3.png
+zaatar-manakish https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154809_469d9adf-8a8d-4d6a-b551-b4f57fee574d.png
+cheese-manakish https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154809_1e586813-7e95-4710-a6ec-5ded97efa6e7.png
+lahm-bi-ajeen https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154809_208744fc-f4bf-4409-9342-014f7f514707.png
+bread https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154810_143467e8-5283-49d9-8fdf-fcd4a9b3872f.png
+kunafa https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154809_2e1fdd59-531d-44ab-ba0b-0548beac99ba.png
+umm-ali https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154810_826c5ccf-d1e0-4ad6-9678-1314b976a29d.png
+muhallabia https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154809_62ddb587-5f1a-477d-91c0-cd6e4222a7d4.png
+saudi-coffee https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_155239_758a5a6b-f5b8-420d-8058-b57a3ac957f3.png
+karak https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_160943_5d35008b-bf42-496d-84a2-5aaaaf43a6f0.png
+lemon-mint https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154809_879511f5-5957-4465-a7f4-abb498c1d88e.png
+ayran https://d8j0ntlcm91z4.cloudfront.net/user_3KEzB9B3k7k7KvaEiefqwv7OPXv/hf_20261023_154818_303909eb-5882-4c06-8024-8abc75b1e75d.png
