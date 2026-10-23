@@ -8,6 +8,9 @@ import { guestSnapshot, placeOrder, requestService } from "@/server/guest";
 import { verifyPin } from "@/server/pin";
 import { maybeSimulate } from "@/server/sim";
 import { acknowledgeRequest, closeSession, markLines, moveTicket, setAvailable, setSimulation, staffSnapshot } from "@/server/staff";
+import { readStaffToken, staffToken } from "@/server/auth";
+import { appKey } from "@/server/keys";
+import { rawQuery } from "@/db/raw";
 
 let conn: Connection;
 let r: Created;
@@ -202,5 +205,26 @@ describe("cleanup", () => {
     expect((await conn.db.select().from(s.restaurants).where(eq(s.restaurants.id, old.id))).length).toBe(0);
     expect((await conn.db.select().from(s.orders).where(eq(s.orders.restaurantId, old.id))).length).toBe(0);
     expect((await conn.db.select().from(s.restaurants).where(eq(s.restaurants.id, r.id))).length).toBe(1);
+  });
+});
+
+describe("keys and staff sessions", () => {
+  it("makes its own keys once, keeps them in the database, and signs staff cookies with them", async () => {
+    const session = await appKey("session");
+    expect(session.length).toBeGreaterThanOrEqual(40);
+    expect(await appKey("session")).toBe(session);
+    expect(await appKey("rate")).not.toBe(session);
+    const rows = await rawQuery<{ name: string; value: string }>(conn.raw, `SELECT name, value FROM sufra.app_keys ORDER BY name`);
+    expect(rows.map((k) => k.name)).toEqual(["rate", "session"]);
+    expect(rows.find((k) => k.name === "session")!.value).toBe(session);
+
+    const exp = Date.now() + 60_000;
+    const token = await staffToken(r.id, exp);
+    expect(await readStaffToken(token)).toEqual({ rid: r.id, exp });
+    const [payload, mac] = token.split(".");
+    const forged = Buffer.from(JSON.stringify({ rid: "rst_other", exp })).toString("base64url");
+    expect(await readStaffToken(`${forged}.${mac}`)).toBeNull();
+    expect(await readStaffToken(`${payload}.${mac.slice(0, -2)}xx`)).toBeNull();
+    expect(await readStaffToken(await staffToken(r.id, Date.now() - 1000))).toBeNull();
   });
 });

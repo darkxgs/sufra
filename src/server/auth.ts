@@ -1,9 +1,10 @@
 import "server-only";
-import { createHash, createHmac, timingSafeEqual } from "node:crypto";
+import { createHmac, timingSafeEqual } from "node:crypto";
 import { and, eq, gt, sql } from "drizzle-orm";
 import { cookies, headers } from "next/headers";
 import { getConnection, type Connection } from "@/db";
 import { attempts, restaurants, type Restaurant } from "@/db/schema";
+import { appKey } from "./keys";
 
 // Staff sign in to a restaurant with its code and a six-digit PIN (or by
 // scanning a pairing QR), and stay signed in through a signed cookie. Guests
@@ -12,25 +13,18 @@ import { attempts, restaurants, type Restaurant } from "@/db/schema";
 export const STAFF_COOKIE = "sufra_staff";
 const DAY = 86_400_000;
 
-function secret(): string {
-  const s = process.env.AUTH_SECRET;
-  if (s && s.length >= 16) return s;
-  if (process.env.VERCEL_ENV === "production") throw new Error("AUTH_SECRET is not set");
-  return "sufra-local-development-secret";
-}
+const sign = async (payload: string) => createHmac("sha256", await appKey("session")).update(payload).digest("base64url");
 
-const sign = (payload: string) => createHmac("sha256", secret()).update(payload).digest("base64url");
-
-export function staffToken(rid: string, expiresAt: number): string {
+export async function staffToken(rid: string, expiresAt: number): Promise<string> {
   const payload = Buffer.from(JSON.stringify({ rid, exp: expiresAt })).toString("base64url");
-  return `${payload}.${sign(payload)}`;
+  return `${payload}.${await sign(payload)}`;
 }
 
-export function readStaffToken(token: string | undefined): { rid: string; exp: number } | null {
+export async function readStaffToken(token: string | undefined): Promise<{ rid: string; exp: number } | null> {
   if (!token) return null;
   const [payload, mac] = token.split(".");
   if (!payload || !mac) return null;
-  const want = Buffer.from(sign(payload));
+  const want = Buffer.from(await sign(payload));
   const got = Buffer.from(mac);
   if (want.length !== got.length || !timingSafeEqual(want, got)) return null;
   try {
@@ -44,7 +38,7 @@ export function readStaffToken(token: string | undefined): { rid: string; exp: n
 /** Signs this browser in to a restaurant. Demo sessions end when the demo does. */
 export async function setStaffCookie(r: Pick<Restaurant, "id" | "expiresAt">) {
   const exp = r.expiresAt ? r.expiresAt.getTime() : Date.now() + 30 * DAY;
-  (await cookies()).set(STAFF_COOKIE, staffToken(r.id, exp), {
+  (await cookies()).set(STAFF_COOKIE, await staffToken(r.id, exp), {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
@@ -59,7 +53,7 @@ export async function clearStaffCookie() {
 
 /** The signed-in restaurant, or null. Expired demos count as signed out. */
 export async function currentRestaurant(conn?: Connection): Promise<Restaurant | null> {
-  const t = readStaffToken((await cookies()).get(STAFF_COOKIE)?.value);
+  const t = await readStaffToken((await cookies()).get(STAFF_COOKIE)?.value);
   if (!t) return null;
   const c = conn ?? (await getConnection());
   const [r] = await c.db.select().from(restaurants).where(eq(restaurants.id, t.rid));
@@ -68,10 +62,11 @@ export async function currentRestaurant(conn?: Connection): Promise<Restaurant |
   return r;
 }
 
+/** The visitor's address, keyed and hashed for rate limits; the address itself is never stored. */
 export async function clientIpHash(): Promise<string> {
   const h = await headers();
   const ip = h.get("x-forwarded-for")?.split(",")[0]?.trim() || h.get("x-real-ip") || "local";
-  return createHash("sha256").update(`${process.env.RATE_SALT ?? secret()}:${ip}`).digest("hex").slice(0, 32);
+  return createHmac("sha256", await appKey("rate")).update(ip).digest("hex").slice(0, 32);
 }
 
 /**

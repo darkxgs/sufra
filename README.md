@@ -75,7 +75,7 @@ WHERE id = $1 RETURNING order_seq;
 
 **Regional details.** Saudi menus show VAT-inclusive prices and calories, with the SFDA reminder that adults need about 2,000 calories a day. Egyptian bills add a service charge, then VAT on both. Arabic counts agree with their numbers (منذ دقيقتين، منذ 3 دقائق، منذ 11 دقيقة), and guest timestamps use the restaurant's time zone.
 
-**Signing in.** PINs are hashed with scrypt, attempts are limited per code and visitor, and staff sessions are HMAC-signed cookies. Every staff action checks that the row it touches belongs to the signed-in restaurant.
+**Signing in.** PINs are hashed with scrypt, attempts are limited per code and visitor, and staff sessions are HMAC-signed cookies. The signing key is `AUTH_SECRET` when it's set; otherwise Sufra makes a random key the first time it needs one and keeps it in the database, so a fresh deployment needs no secrets and never signs with anything guessable. Every staff action checks that the row it touches belongs to the signed-in restaurant.
 
 ## Photographs
 
