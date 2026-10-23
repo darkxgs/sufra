@@ -4,7 +4,13 @@ Table ordering for restaurants in the Gulf and Egypt. Guests scan the QR code on
 
 *Sufra* is the Arabic word for the spread a meal is laid out on.
 
+![Sufra's home page: tickets clipped to the kitchen rail](docs/screenshots/landing.jpg)
+
 **Try it:** "Open the live demo" on the home page gives you your own copy of Jamr, a made-up charcoal grill, with dinner already under way: three tables eating, one waiting for its bill. Scan table 4's code with your phone, order, and watch the ticket arrive on the kitchen board. Slide it to "ready" and your phone shows it. Ask for the bill from the phone, then close the table from the floor plan. Switch on "Busy night" and the other tables keep ordering while the board is open.
+
+| | |
+|---|---|
+| ![The kitchen board: new, cooking and ready, with station views](docs/screenshots/kitchen.jpg) | ![The floor plan, with the tables that need someone](docs/screenshots/floor.jpg) |
 
 ## What it does
 
